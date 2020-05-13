@@ -32,6 +32,20 @@ output_folderpath = Path("/path/to/folder/saved_dice")
 # Set to False and it will display them all in blender to be viewed
 save_files = False
 
+tweaks_for_font = {
+    # "num_version": "1",
+    "num_scale":
+        {
+            "d6": (None, None, None),
+            "d4": (None, None, None),
+            "d8": (None, None, None),
+            "d10-single": (None, None, None),
+            "d10-double-vertical": (None, None, None),
+            "d12": (None, None, None),
+            "d20": (None, None, None)
+        }
+}
+
 
 ##########################################
 # !!!!!!!!!!!!
@@ -70,7 +84,7 @@ save_files = False
 
 dice_list = [
     {
-        "name": "d6", # "Follow-the-number" config, each number's orientation
+        "name": "d6",  # "Follow-the-number" config, each number's orientation
         "num_location": (0, 0, 8.6),
         "num_scale": (625, 625, 1),
         "final_location": (40, 30, 0),
@@ -184,7 +198,7 @@ dice_list = [
 
             {"number": "1", "x": 35.265, "y": 90, "z": 0},
             {"number": "", "x": -35.265, "y": 0, "z": 0}
-            ],
+        ],
         "num_location": (0, 0, 8.6),
         "num_scale": (500, 500, 1),
         "final_location": (40, -30, 0),
@@ -230,7 +244,7 @@ dice_list = [
         "number_height": 4
     },
     {
-        "name": "d10-double-vertical", # Numbers face the opposing end of the dice
+        "name": "d10-double-vertical",  # Numbers face the opposing end of the dice
         "rotations": [
             {"number": "60", "x": 35.7, "y": 72, "z": 0},
             {"number": "", "x": -35.7, "y": 0, "z": 0},
@@ -262,7 +276,7 @@ dice_list = [
             {"number": "50", "x": 35.7, "y": 72, "z": 0},
             {"number": "", "x": -35.7, "y": 0, "z": 0}
         ],
-        "num_location": (0, -1.5, 9), # (0, -2.5, 9),
+        "num_location": (0, -1.5, 9),  # (0, -2.5, 9),
         "num_scale": (375, 375, 1),
         "final_location": (-40, -30, 0),
         "number_height": 4
@@ -552,6 +566,8 @@ def create_object(dice_name):
     elif dice_name.startswith("d20-") or dice_name == "d20":
         bpy.ops.mesh.primitive_solid_add(source='20')
 
+    if tweaks_for_font.get("num_version"):
+        dice_name += "-" + tweaks_for_font["num_version"]
     # Get the object and rename it.
     dice = bpy.context.object
     dice.name = dice_name
@@ -613,6 +629,17 @@ def gen_numbers_required(rotations_info):
             if rotation["number"] not in numbers_required:
                 numbers_required.append(rotation["number"])
     return numbers_required
+
+
+def scale_for_font(vector_1, dice_name):
+    for dice, scale_tweaks in tweaks_for_font["num_scale"].items():
+        if dice_name.startswith(dice) or dice_name == dice:
+            new_vector = (vector_1[0] * (scale_tweaks[0] or 1),
+                          vector_1[1] * (scale_tweaks[1] or 1),
+                          vector_1[2] * (scale_tweaks[2] or 1)
+                          )
+            return new_vector
+    return vector_1
 
 
 def save_dice(object_to_save, file_path):
@@ -678,7 +705,7 @@ for dice_info in dice_list:
             if resized_numbers[rotation["number"]] == 0:
                 select_object(num_obj)
 
-                num_obj.scale = dice_info["num_scale"]
+                num_obj.scale = scale_for_font(dice_info["num_scale"], dice_obj.name)
                 bpy.ops.object.transform_apply(scale=True)
 
                 num_obj.dimensions[2] = dice_info.get("number_height", 2)
@@ -692,7 +719,11 @@ for dice_info in dice_list:
 
         # Rotate the cube.
         # This works for d4 & d6:
-        rotate_object(dice_obj, {"x": rotation['x'], "y": rotation['y'], "z": rotation['z']}, reverse=False)
+        rotate_object(dice_obj,
+                      {"x": rotation['x'],
+                       "y": rotation['y'],
+                       "z": rotation['z']},
+                      reverse=False)
 
     # Delete the numbers
     for number in numbers_required:
@@ -705,4 +736,3 @@ for dice_info in dice_list:
     else:
         dice_obj.location = dice_info["final_location"]
         bpy.ops.object.transform_apply(location=True)
-
