@@ -33,7 +33,7 @@ output_folderpath = Path("/path/to/folder/saved_dice")
 save_files = False
 
 tweaks_for_font = {
-    # "num_version": "1",
+    "num_version": "1",
     "num_scale":
         {
             "d6": (None, None, None),
@@ -43,6 +43,7 @@ tweaks_for_font = {
             "d10-double-vertical": (None, None, None),
             "d12": (None, None, None),
             "d20": (None, None, None)
+
         }
 }
 
@@ -88,7 +89,7 @@ dice_list = [
         "num_location": (0, 0, 8.6),
         "num_scale": (625, 625, 1),
         "final_location": (40, 30, 0),
-        "number_height": 4,
+        "number_height": 2,
         "rotations":
         [
             # {"number": "underscore", "x": 0, "y": 0, "z": 0},
@@ -102,7 +103,10 @@ dice_list = [
             {"number": "", "x": 0, "y": 0, "z": 90},
             {"number": "5", "x": 90, "y": 0, "z": 0},
             {"number": "", "x": 0, "y": 0, "z": 90},
-            {"number": "6", "x": 0, "y": 0, "z": 0}
+            {"number": "6", "x": 0, "y": 0, "z": 0},
+            # Prep for printing
+            {"number": "", "x": 45, "y": 0, "z": 0},
+            {"number": "", "x": 0, "y": 45, "z": 0}
         ]
     },
     # {
@@ -171,7 +175,7 @@ dice_list = [
         "num_location": (0, 6, 5.6),
         "num_scale": (400, 400, 1),
         "final_location": (0, 60, 0),
-        "number_height": 4
+        "number_height": 2
     },
     {
         "name": "d8",
@@ -197,12 +201,16 @@ dice_list = [
             {"number": "", "x": -35.265, "y": 0, "z": 0},
 
             {"number": "1", "x": 35.265, "y": 90, "z": 0},
-            {"number": "", "x": -35.265, "y": 0, "z": 0}
+            {"number": "", "x": -35.265, "y": 0, "z": 0},
+
+            # Prep for printing
+            {"number": "", "x": -55, "y": 0, "z": 0},
+            {"number": "", "x": 180, "y": 0, "z": 0}
         ],
         "num_location": (0, 0, 8.6),
         "num_scale": (500, 500, 1),
         "final_location": (40, -30, 0),
-        "number_height": 4
+        "number_height": 2
     },
     {
         "name": "d10-single",
@@ -236,12 +244,15 @@ dice_list = [
             {"number": "", "x": -35.7, "y": 0, "z": 0},
 
             {"number": "5", "x": 35.7, "y": 72, "z": 0},
-            {"number": "", "x": -35.7, "y": 0, "z": 0}
+            {"number": "", "x": -35.7, "y": 0, "z": 0},
+            # Prep for printing
+            {"number": "", "x": -55, "y": 0, "z": 0},
+            {"number": "", "x": 180, "y": 0, "z": 0}
         ],
         "num_location": (0, -0.75, 9),
         "num_scale": (500, 500, 1),
         "final_location": (0, -60, 0),
-        "number_height": 4
+        "number_height": 2
     },
     {
         "name": "d10-double-vertical",  # Numbers face the opposing end of the dice
@@ -274,12 +285,15 @@ dice_list = [
             {"number": "", "x": -35.7, "y": 0, "z": 0},
 
             {"number": "50", "x": 35.7, "y": 72, "z": 0},
-            {"number": "", "x": -35.7, "y": 0, "z": 0}
+            {"number": "", "x": -35.7, "y": 0, "z": 0},
+            # Prep for printing
+            {"number": "", "x": -55, "y": 0, "z": 0},
+            {"number": "", "x": 180, "y": 0, "z": 0}
         ],
         "num_location": (0, -1.5, 9),  # (0, -2.5, 9),
         "num_scale": (375, 375, 1),
         "final_location": (-40, -30, 0),
-        "number_height": 4
+        "number_height": 2
     },
     # {
     #     "name": "d10-double-horizontal", # Numbers face the next face around on the same side
@@ -368,11 +382,15 @@ dice_list = [
             {"number": "7", "x": 63.43, "y": 0, "z": -72},
             {"number": "", "x": -63.43, "y": 0, "z": 0},
             {"number": "5", "x": 63.43, "y": 0, "z": -72},
+            # Prep for printing
+            {"number": "", "x": 0, "y": 0, "z": 18},
+            {"number": "", "x": 0, "y": -37.3781, "z": 0},
+            {"number": "", "x": 180, "y": 0, "z": 0}
         ],
         "num_location": (0, 0, 9.75),
         "num_scale": (500, 500, 1),
         "final_location": (-40, 30, 0),
-        "number_height": 4
+        "number_height": 2
     },
     {
         "name": "d20",
@@ -460,12 +478,15 @@ dice_list = [
             {"number": "", "x": 0, "y": 0, "z": -120},
 
             {"number": "", "x": 0, "y": 0, "z": -60},
-            {"number": "", "x": -180, "y": 0, "z": 0}
+            {"number": "", "x": -180, "y": 0, "z": 0},
+            # Prep for printing
+            {"number": "", "x": 0, "y": 0, "z": 30},
+            {"number": "", "x": 0, "y": -37.5, "z": 0}
         ],
         "num_location": (0, 0, 11),
         "num_scale": (280, 280, 000),
         "final_location": (0, 0, 0),
-        "number_height": 4
+        "number_height": 2
     }
 ]
 
